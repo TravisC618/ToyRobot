@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { DIRECTION } = require('../constants/robot');
-const { isValidPlacement } = require('../lib/validation');
+const { isValidPlacement, isValidMovement } = require('../lib/validation');
 
 describe('Validation helpers', () => {
     describe('Placement Validation', () => {
@@ -62,6 +62,32 @@ describe('Validation helpers', () => {
                 const result = isValidPlacement(0, 0, 'NORTHEAST');
                 expect(result).to.be.false;
             });
+        });
+    });
+
+    describe('Movement Validation', () => {
+        it('should return true if movement is valid', () => {
+            const isPlaced = true;
+            const result = isValidMovement(isPlaced, { x: 0, y: 1 });
+            expect(result).to.be.true;
+        });
+
+        it('should return false if robot is not placed', () => {
+            const isPlaced = false;
+            const result = isValidMovement(isPlaced, { x: 0, y: 0 });
+            expect(result).to.be.false;
+        });
+
+        it('should return false if movement is outside the table', () => {
+            const isPlaced = false;
+            const result = isValidMovement(isPlaced, { x: 5, y: 0 });
+            expect(result).to.be.false;
+        });
+
+        it('should return false if movement is not valid', () => {
+            const isPlaced = false;
+            const result = isValidMovement(isPlaced, { x: '0', y: 0 });
+            expect(result).to.be.false;
         });
     });
 });

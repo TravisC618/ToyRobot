@@ -46,6 +46,11 @@ describe('ToyRobot', () => {
     });
 
     describe('move()', () => {
+        it('should ignore the command if robot is not placed', () => {
+            const originalPosition = toyRobot.position;
+            toyRobot.move();
+            expect(toyRobot.position).to.deep.equal(originalPosition);
+        });
         it('should move to the correct place if robot is facing NORTH', () => {
             toyRobot.place(0, 0, DIRECTION.north);
             toyRobot.move();
@@ -66,9 +71,21 @@ describe('ToyRobot', () => {
             toyRobot.move();
             expect(toyRobot.position).to.deep.equal({ x: 1, y: 0 });
         });
+        it('should remain the previous position if movement is invalid', () => {
+            toyRobot.place(0, 0, DIRECTION.south);
+            const originalPosition = toyRobot.position;
+
+            toyRobot.move();
+            expect(toyRobot.position).to.deep.equal(originalPosition);
+        });
     });
 
     describe('left()', () => {
+        it('should ignore the command if robot is not placed', () => {
+            const originalDirection = toyRobot.direction;
+            toyRobot.left();
+            expect(toyRobot.direction).to.deep.equal(originalDirection);
+        });
         it('should be face to the correct direction if robot is facing NORTH', () => {
             toyRobot.place(0, 0, DIRECTION.north);
             toyRobot.left();
@@ -92,6 +109,11 @@ describe('ToyRobot', () => {
     });
 
     describe('right()', () => {
+        it('should ignore the command if robot is not placed', () => {
+            const originalDirection = toyRobot.direction;
+            toyRobot.right();
+            expect(toyRobot.direction).to.deep.equal(originalDirection);
+        });
         it('should be face to the correct direction if robot is facing NORTH', () => {
             toyRobot.place(0, 0, DIRECTION.north);
             toyRobot.right();
@@ -115,6 +137,11 @@ describe('ToyRobot', () => {
     });
 
     describe('report()', () => {
+        it('should ignore the command if robot is not placed', () => {
+            const logSpy = spy.on(console, 'log');
+            toyRobot.report();
+            expect(logSpy).to.have.not.been.called;
+        });
         it('should log the robot info', () => {
             const logSpy = spy.on(console, 'log');
             toyRobot.place(0, 0, DIRECTION.north);
