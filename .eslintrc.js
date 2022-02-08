@@ -16,7 +16,6 @@ module.exports = {
     'rules': {
         'semi': [1, 'always'],
         'complexity': [1,7],
-        'max-statements': [1,8],
         'max-depth': [1,2],
         'no-unused-vars': [2, {'vars': 'all', 'args': 'after-used'}],
         'new-cap': 0,

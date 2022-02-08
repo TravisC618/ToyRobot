@@ -37,4 +37,12 @@ const MOVE_MAP = {
     }
 };
 
-module.exports = { TABLE_SIZE, DIRECTION, MOVE_MAP };
+const ROBOT_CMD = {
+    place: 'PLACE',
+    move: 'MOVE',
+    left: 'LEFT',
+    right: 'RIGHT',
+    report: 'REPORT'
+};
+
+module.exports = { TABLE_SIZE, DIRECTION, MOVE_MAP, ROBOT_CMD };
