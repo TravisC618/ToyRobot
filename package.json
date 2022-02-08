@@ -6,8 +6,11 @@
   "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "^10.1.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.3.6",
+    "chai-spies": "^1.0.0",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
