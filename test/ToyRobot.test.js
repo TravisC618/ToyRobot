@@ -14,6 +14,7 @@ describe('ToyRobot', () => {
     
     afterEach(() => {
         toyRobot = undefined;
+        spy.restore();
     });
 
     describe('place(x, y, direction)', () => {
@@ -21,6 +22,26 @@ describe('ToyRobot', () => {
             toyRobot.place(0, 0, DIRECTION.north);
             expect(toyRobot.position).to.deep.equal({ x: 0, y: 0});
             expect(toyRobot.direction).to.equal(DIRECTION.north);
+        });
+
+        it('should log an error message with invalid params, and robot state will not change', () => {
+            const logSpy = spy.on(console, 'log');
+            const originalState = {
+                position: toyRobot.position,
+                direction: toyRobot.direction,
+                placed: toyRobot.placed,
+            };
+
+            toyRobot.place(-1, 0, 'abc');
+            const currentState = {
+                position: toyRobot.position,
+                direction: toyRobot.direction,
+                placed: toyRobot.placed,
+            };
+
+            expect(toyRobot.placed).to.deep.equal(false);
+            expect(logSpy).to.have.been.called.with('Sorry, it is not a valid placement. Please try again :)');
+            expect(originalState).to.deep.equal(currentState);
         });
     });
 
